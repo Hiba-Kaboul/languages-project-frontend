@@ -27,7 +27,7 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
               tabsindex = index;
             });
           },
-          destinations: [
+          destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: "Home"),
             NavigationDestination(
                 icon: Icon(Icons.local_grocery_store), label: "Cart"),
