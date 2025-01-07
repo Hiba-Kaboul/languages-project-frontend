@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:languages_project/service/get_type_service.dart';
-import 'package:languages_project/view/book_details_page.dart';
+
 import 'package:languages_project/view/books_page.dart';
 
 class TypesPage extends StatelessWidget {

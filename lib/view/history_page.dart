@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:languages_project/service/log_out_service.dart';
 import 'package:languages_project/view/log_in_page.dart';
@@ -37,13 +38,38 @@ class HistoryPage extends StatelessWidget {
                 leading: Icon(Icons.person),
               ),
             ),
-            const ListTile(
-              title: Text('Settings'),
+             ListTile(
+              title: Text('Settings').tr(),
               leading: Icon(Icons.settings),
             ),
-            const ListTile(
-              title: Text('Langauge'),
-              leading: Icon(Icons.language),
+            ExpansionTile(
+              title:  Text("language").tr(),
+              onExpansionChanged: (bool isExpencion) {
+                print(isExpencion);
+              },
+              controlAffinity: ListTileControlAffinity.leading,
+              tilePadding: EdgeInsets.all(50),
+              expandedCrossAxisAlignment: CrossAxisAlignment.end,
+              dense: false,
+              shape: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              children: [
+                TextButton(
+                    onPressed: () {
+                      if (context.locale.languageCode == 'ar') {
+                        context.setLocale(Locale('en', 'US'));
+                      }
+                    },
+                    child: Text("Enghlish Language").tr()
+                    ),
+                TextButton(
+                    onPressed: () {
+                      if (context.locale.languageCode == 'en') {
+                        context.setLocale(Locale('ar', 'AR'));
+                      }
+                    },
+                    child: Text("Arabic Language").tr()),
+              ],
             ),
             const ListTile(
               title: Text('Theme'),

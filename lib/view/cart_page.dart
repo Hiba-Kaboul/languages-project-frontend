@@ -1,22 +1,24 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:languages_project/service/log_out_service.dart';
 import 'package:languages_project/view/log_in_page.dart';
-import 'package:languages_project/view/profile_page.dart';
 
+///////////////////////////
 class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+  CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("cart")),
-       appBar: AppBar(),
-       drawer: Drawer(
+      appBar: AppBar(
+        backgroundColor: Color(0xff90CDF9),
+      ),
+      drawer: Drawer(
         surfaceTintColor: Colors.white,
         backgroundColor: Color.fromARGB(255, 150, 151, 152),
         shadowColor: Color(0xff90CDF9),
         elevation: 20,
-        shape: RoundedRectangleBorder(),
+        shape: const RoundedRectangleBorder(),
         child: Column(
           children: [
             const UserAccountsDrawerHeader(
@@ -25,37 +27,55 @@ class CartPage extends StatelessWidget {
                 ),
                 accountName: Text("hiba Kaboul"),
                 accountEmail: Text("hiba@gmail.com")),
-            InkWell(onTap: () {
-               Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
-                      ));
-            },
-              child: const ListTile(
-                title: Text('Profile'),
-                leading: Icon(Icons.person),
-              ),
+             ListTile(
+              title: Text('Profile').tr(),
+              leading: Icon(Icons.person),
             ),
-            const ListTile(
-              title: Text('Settings'),
+             ListTile(
+              title: Text('Settings').tr(),
               leading: Icon(Icons.settings),
             ),
-            const ListTile(
-              title: Text('Langauge'),
-              leading: Icon(Icons.language),
+            ExpansionTile(
+              title:  Text("language").tr(),
+              onExpansionChanged: (bool isExpencion) {
+                print(isExpencion);
+              },
+              controlAffinity: ListTileControlAffinity.leading,
+              tilePadding: EdgeInsets.all(50),
+              expandedCrossAxisAlignment: CrossAxisAlignment.end,
+              dense: false,
+              shape: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              children: [
+                TextButton(
+                    onPressed: () {
+                      if (context.locale.languageCode == 'ar') {
+                        context.setLocale(Locale('en', 'US'));
+                      }
+                    },
+                    child: Text("Enghlish Language").tr()
+                    ),
+                TextButton(
+                    onPressed: () {
+                      if (context.locale.languageCode == 'en') {
+                        context.setLocale(Locale('ar', 'AR'));
+                      }
+                    },
+                    child: Text("Arabic Language").tr()),
+              ],
             ),
-            const ListTile(
-              title: Text('Theme'),
+            // const ListTile(
+            //   title: Text('Langauge'),
+            //   leading: Icon(Icons.language),
+            // ),
+             ListTile(
+              title: Text('Theme').tr(),
               leading: Icon(Icons.dark_mode),
             ),
-            const SizedBox(
-              height: 200,
-            ),
-            ListTile(
-              title: TextButton(
-                  style: TextButton.styleFrom(),
-                  onPressed: () async {
+
+            InkWell(
+              onTap: () async{
+                 
                     // Navigator.push(
                     //     context,
                     //     MaterialPageRoute(
@@ -63,7 +83,6 @@ class CartPage extends StatelessWidget {
                     //     ));
 
                     bool status = await logout();
-
                     if (status) {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Log out Successfuly"),
@@ -74,20 +93,169 @@ class CartPage extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => LogInPage(),
                           ));
-                    }else {
+                    } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Log out Not Successfuly"),
                         backgroundColor: Colors.red,
                       ));
-                    }
-                  },
-                  child: const Text("Log Out")),
-              leading: const Icon(
-                Icons.logout,
-                color: Colors.black,
+                    
+                  }
+              },
+              child: ListTile(
+                title: Text("Log Out").tr(),
+                leading: const Icon(
+                  Icons.logout,
+                  color: Colors.black,
+                ),
               ),
             ),
           ],
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 3),
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.separated(
+                  itemCount: 15,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      height: 100,
+                      child: Card(
+                        surfaceTintColor: Color(0xff90CDF9),
+                        elevation: 10,
+                        shadowColor: Color(0xff90CDF9),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: 90,
+                              height: 70,
+                              // alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image: NetworkImage(
+                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfaJgwmIZea1z7dthmh0dbbUD7vzFYuiPjHA&s',
+                                    ),
+                                    fit: BoxFit.fill),
+                                // border: Border.all(
+                                //   color: const Color(0xffaabedf),
+                                // ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Cookie Sandwich',
+                                  style: TextStyle(
+                                    fontFamily: "mer",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 3, bottom: 3),
+                                  child: Text(
+                                    'Restaurant Name',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 62, 56, 56),
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  children: [Text(
+                                      '20',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xff90CDF9),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.attach_money,
+                                      size: 12,
+                                      color: Color(0xff90CDF9),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Container(
+                              width: 110,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Card(
+                                color: Colors.white,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    // IconButton(
+                                    //   onPressed: () {},
+                                    //   icon: const Icon(
+                                    //     Icons.delete,
+                                    //     color: Color(0xff028174),
+                                    //     size: 16,
+                                    //   ),//   // splashRadius: 3,
+                                    //   // style: const ButtonStyle(
+                                    //   //     tapTargetSize:
+                                    //   //         MaterialTapTargetSize.shrinkWrap),
+                                    // ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.minimize_outlined,
+                                        color: Color(0xff90CDF9),
+                                        size: 16,
+                                      ),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10),
+                                      splashRadius: 1,
+                                    ),
+                                    const Text(
+                                      '01',
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.add_outlined,
+                                        color: Color(0xff90CDF9),
+                                        size: 16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox();
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

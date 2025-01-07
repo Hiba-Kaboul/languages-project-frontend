@@ -5,7 +5,7 @@ class GetBooksModel {
   String name;
   String image;
   String author;
-  String price;
+  num price;
   GetBooksModel({
     required this.name,
     required this.image,
@@ -17,7 +17,7 @@ class GetBooksModel {
     String? name,
     String? image,
     String? author,
-    String? price,
+    num? price,
   }) {
     return GetBooksModel(
       name: name ?? this.name,
@@ -41,7 +41,7 @@ class GetBooksModel {
       name: map['name'] as String,
       image: map['image'] as String,
       author: map['author'] as String,
-      price: map['price'] as String,
+      price: map['price'] as num,
     );
   }
 

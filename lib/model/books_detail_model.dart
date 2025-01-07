@@ -5,7 +5,7 @@ class BooksDetailModel {
   String name;
   String author;
   String image;
-  String price;
+  num price;
   String ratings;
   String details;
   BooksDetailModel({
@@ -21,7 +21,7 @@ class BooksDetailModel {
     String? name,
     String? author,
     String? image,
-    String? price,
+    num? price,
     String? ratings,
     String? details,
   }) {
@@ -46,16 +46,21 @@ class BooksDetailModel {
     };
   }
 
-  factory BooksDetailModel.fromMap(Map<String, dynamic> map) {
-    return BooksDetailModel(
-      name: map['name'] as String,
-      author: map['author'] as String,
-      image: map['image'] as String,
-      price: map['price'] as String,
-      ratings: map['ratings'] as String,
-      details: map['details'] as String,
-    );
+   factory BooksDetailModel.fromMap(Map<String, dynamic> map) {
+  if (map.containsKey('data') && map['data'] is Map<String, dynamic>) {
+    map = map['data'] as Map<String, dynamic>;
   }
+
+  return BooksDetailModel(
+   // id: map['id'] as int,
+    name: map['name'] as String,
+    author: map['author'] as String,
+    image: map['image'] as String,
+    price: map['price'] as num,
+    ratings: map['ratings'] as String,
+    details: map['details'] as String,
+  );
+}
 
   String toJson() => json.encode(toMap());
 

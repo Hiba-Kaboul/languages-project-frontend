@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:languages_project/model/sign_up_model.dart';
@@ -44,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Gap(10),
-                    const Padding(
+                     Padding(
                       padding: EdgeInsets.only(top: 30.0),
                       child: Text(
                         "Sign Up",
@@ -52,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontSize: 35,
                             fontWeight: FontWeight.w400,
                             color: Colors.white),
-                      ),
+                      ).tr(),
                     ),
                     Image.asset(width: 150, height: 150, "images/Group.png")
                   ],
@@ -65,7 +66,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 60,
               child: TextField(
                 controller: firstcontroller,
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide()),
@@ -73,20 +74,21 @@ class _SignUpPageState extends State<SignUpPage> {
                       Icons.person,
                       color: Color(0xff8F9BB3),
                     ),
-                    hintText: "Enter Your First Name",
+                    hintText: "Enter Your First Name".tr(),
                     hintStyle: TextStyle(
                         color: Color(0xff8F9BB3),
                         fontSize: 15,
                         fontWeight: FontWeight.w400)),
-              ),
+              )
             ),
             Gap(10),
             Container(
               width: 370,
               height: 60,
               child: TextField(
+              
                 controller: lastcontroller,
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide()),
@@ -94,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       Icons.person,
                       color: Color(0xff8F9BB3),
                     ),
-                    hintText: "Enter Your Last Name",
+                    hintText: "Enter Your Last Name".tr(),
                     hintStyle: TextStyle(
                         color: Color(0xff8F9BB3),
                         fontSize: 15,
@@ -107,15 +109,14 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 60,
               child: TextField(
                 controller: phonecontroller,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                decoration:  InputDecoration(border: OutlineInputBorder(
+borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide()),
                     prefixIcon: Icon(
                       Icons.phone_android_rounded,
                       color: Color(0xff8F9BB3),
                     ),
-                    hintText: "Enter Your Phone Number",
+                    hintText: "Enter Your Phone Number".tr(),
                     hintStyle: TextStyle(
                         color: Color(0xff8F9BB3),
                         fontSize: 15,
@@ -149,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               color: Color(0xff8F9BB3),
                             ),
                     ),
-                    hintText: "Enter Your Password",
+                    hintText: "Enter Your Password".tr(),
                     hintStyle: const TextStyle(
                         color: Color(0xff8F9BB3),
                         fontSize: 15,
@@ -183,7 +184,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               color: Color(0xff8F9BB3),
                             ),
                     ),
-                    hintText: "Enter Your Passowrd again",
+                    hintText: "Enter Your Passowrd again".tr(),
                     hintStyle: const TextStyle(
                         color: Color(0xff8F9BB3),
                         fontSize: 15,
@@ -195,8 +196,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff90CDF9),
                     maximumSize: Size(346, 44)),
-                onPressed: () async {
-                  bool status = await SignUp(SignUpModel(
+                onPressed: () async {bool status = await SignUp(SignUpModel(
                     first_name: firstcontroller.text,
                     last_name: lastcontroller.text,
                     phone: phonecontroller.text,
@@ -204,23 +204,22 @@ class _SignUpPageState extends State<SignUpPage> {
                     password_confirmation: passwordagaincontroller.text,
                   ));
                   if (status) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Sign Up Successfuly"),
-                      backgroundColor: Colors.green,
-                    ));
+                    ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                      content: Text("Sign Up Successfuly").tr(),
+                      backgroundColor: Colors.green,));
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => BottomNavbarPage(),
                         ));
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("There is a Mistack"),
+                    ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                      content: Text("There is a Mistack").tr(),
                       backgroundColor: Colors.red,
                     ));
                   }
                 },
-                child: const Center(
+                child:  Center(
                   child: Text(
                     "Sign Up",
                     style: TextStyle(
@@ -228,7 +227,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
-                  ),
+                  ).tr(),
                 )),
             Gap(15),
             Padding(
@@ -241,13 +240,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           builder: (context) => LogInPage(),
                         ));
                   },
-                  child: const Text(
-                    "I have account already ",
+                  child:  Text(
+                    "I have account already ".tr(),
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                         color: Color(0xff21B4BD)),
-                  )),
+                  ).tr(),
+                  ),
             )
           ],
         ),

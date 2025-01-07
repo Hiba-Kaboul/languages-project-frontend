@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:languages_project/model/log_in_model.dart';
 import 'package:languages_project/service/log_in_service.dart';
 import 'package:languages_project/view/bottom_navbar_page.dart';
 import 'package:languages_project/view/sign_up_page.dart';
+
 
 class LogInPage extends StatefulWidget {
   LogInPage({super.key});
@@ -33,15 +35,15 @@ class _LogInPageState extends State<LogInPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: const EdgeInsets.only(top: 70),
+                 Padding(
+                  padding:  EdgeInsets.only(top: 70),
                   child: Text(
                     "Login",
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.w400,
                         color: Colors.white),
-                  ),
+                  ).tr(),
                 ),
                 Image.asset(
                   "images/Group.png",
@@ -67,7 +69,7 @@ class _LogInPageState extends State<LogInPage> {
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10)),
-                  hintText: "Enter Phone Number"),
+                  hintText: "Enter Phone Number".tr(),),
             ),
           ),
           const SizedBox(
@@ -94,14 +96,15 @@ class _LogInPageState extends State<LogInPage> {
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10)),
-                  hintText: "Enter Password"),
+                  hintText: "Enter Password".tr(),
+                  )
             ),
           ),
           const SizedBox(
             height: 27,
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 150),
+            padding: const EdgeInsets.only(right: 00),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -117,9 +120,9 @@ class _LogInPageState extends State<LogInPage> {
                   width: 15,
                 ),
                 const Text(
-                  "I read and accept Privacy",
+"I read and accept Privacy",
                   style: TextStyle(color: Color(0xff21B4BD)),
-                )
+                ).tr(),
               ],
             ),
           ),
@@ -128,12 +131,12 @@ class _LogInPageState extends State<LogInPage> {
           ),
           ElevatedButton(
             onPressed: () async {
-         
               bool status = await login(LogInModel(
                   phone: phone_number.text, password: password.text));
               if (status) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("login successfully"),
+                ScaffoldMessenger.of(context).showSnackBar(
+                   SnackBar(
+                  content: Text("login successfully").tr(),
                   backgroundColor: Colors.green,
                 ));
                 Navigator.push(
@@ -142,8 +145,9 @@ class _LogInPageState extends State<LogInPage> {
                       builder: (context) => BottomNavbarPage(),
                     ));
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("login failed"),
+                ScaffoldMessenger.of(context).showSnackBar(
+                   SnackBar(
+                  content: Text("login failed").tr(),
                   backgroundColor: Colors.red,
                 ));
               }
@@ -153,10 +157,10 @@ class _LogInPageState extends State<LogInPage> {
               //       builder: (context) => HomePage(),
               //     ));
             },
-            child: Text(
+            child:  Text(
               "Login",
               style: TextStyle(color: Colors.white),
-            ),
+            ).tr(),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
@@ -180,7 +184,8 @@ class _LogInPageState extends State<LogInPage> {
                 child: const Text(
                   "I don’t have account.",
                   style: TextStyle(color: Color(0xffF81414)),
-                )),
+                ).tr()
+                ),
           )
         ],
       ),

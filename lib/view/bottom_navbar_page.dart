@@ -20,7 +20,8 @@ class _BottomNavbarPageState extends State<BottomNavbarPage> {
     return Scaffold(
     
       bottomNavigationBar: NavigationBar(
-        indicatorColor: Color(0xff90CDF9),////
+        backgroundColor:  Color(0xff90CDF9),
+      //  indicatorColor: Color(0xff90CDF9),////
           selectedIndex: tabsindex,
           onDestinationSelected: (index) {
             setState(() {
