@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 class BooksDetailModel {
+int id;
   String name;
   String author;
   String image;
@@ -9,6 +10,7 @@ class BooksDetailModel {
   String ratings;
   String details;
   BooksDetailModel({
+    required this.id,
     required this.name,
     required this.author,
     required this.image,
@@ -18,6 +20,7 @@ class BooksDetailModel {
   });
 
   BooksDetailModel copyWith({
+    int? id,
     String? name,
     String? author,
     String? image,
@@ -26,6 +29,7 @@ class BooksDetailModel {
     String? details,
   }) {
     return BooksDetailModel(
+      id: id ?? this.id,
       name: name ?? this.name,
       author: author ?? this.author,
       image: image ?? this.image,
@@ -37,6 +41,7 @@ class BooksDetailModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'name': name,
       'author': author,
       'image': image,
@@ -46,21 +51,17 @@ class BooksDetailModel {
     };
   }
 
-   factory BooksDetailModel.fromMap(Map<String, dynamic> map) {
-  if (map.containsKey('data') && map['data'] is Map<String, dynamic>) {
-    map = map['data'] as Map<String, dynamic>;
+  factory BooksDetailModel.fromMap(Map<String, dynamic> map) {
+    return BooksDetailModel(
+      id: map['id'] as int,
+      name: map['name'] as String,
+      author: map['author'] as String,
+      image: map['image'] as String,
+      price: map['price'] as num,
+      ratings: map['ratings'] as String,
+      details: map['details'] as String,
+    );
   }
-
-  return BooksDetailModel(
-   // id: map['id'] as int,
-    name: map['name'] as String,
-    author: map['author'] as String,
-    image: map['image'] as String,
-    price: map['price'] as num,
-    ratings: map['ratings'] as String,
-    details: map['details'] as String,
-  );
-}
 
   String toJson() => json.encode(toMap());
 
@@ -68,7 +69,7 @@ class BooksDetailModel {
 
   @override
   String toString() {
-    return 'BooksDetailModel(name: $name, author: $author, image: $image, price: $price, ratings: $ratings, details: $details)';
+    return 'BooksDetailModel(id: $id, name: $name, author: $author, image: $image, price: $price, ratings: $ratings, details: $details)';
   }
 
   @override
@@ -76,6 +77,7 @@ class BooksDetailModel {
     if (identical(this, other)) return true;
   
     return 
+      other.id == id &&
       other.name == name &&
       other.author == author &&
       other.image == image &&
@@ -86,7 +88,8 @@ class BooksDetailModel {
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return id.hashCode ^
+      name.hashCode ^
       author.hashCode ^
       image.hashCode ^
       price.hashCode ^

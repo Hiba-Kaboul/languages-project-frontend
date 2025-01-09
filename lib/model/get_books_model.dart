@@ -2,11 +2,13 @@
 import 'dart:convert';
 
 class GetBooksModel {
+  int id;
   String name;
   String image;
   String author;
   num price;
   GetBooksModel({
+    required this.id,
     required this.name,
     required this.image,
     required this.author,
@@ -14,12 +16,14 @@ class GetBooksModel {
   });
 
   GetBooksModel copyWith({
+    int? id,
     String? name,
     String? image,
     String? author,
     num? price,
   }) {
     return GetBooksModel(
+      id: id ?? this.id,
       name: name ?? this.name,
       image: image ?? this.image,
       author: author ?? this.author,
@@ -29,6 +33,7 @@ class GetBooksModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'name': name,
       'image': image,
       'author': author,
@@ -38,6 +43,7 @@ class GetBooksModel {
 
   factory GetBooksModel.fromMap(Map<String, dynamic> map) {
     return GetBooksModel(
+      id: map['id'] as int,
       name: map['name'] as String,
       image: map['image'] as String,
       author: map['author'] as String,
@@ -51,7 +57,7 @@ class GetBooksModel {
 
   @override
   String toString() {
-    return 'GetBooksModel(name: $name, image: $image, author: $author, price: $price)';
+    return 'GetBooksModel(id: $id, name: $name, image: $image, author: $author, price: $price)';
   }
 
   @override
@@ -59,6 +65,7 @@ class GetBooksModel {
     if (identical(this, other)) return true;
   
     return 
+      other.id == id &&
       other.name == name &&
       other.image == image &&
       other.author == author &&
@@ -67,7 +74,8 @@ class GetBooksModel {
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return id.hashCode ^
+      name.hashCode ^
       image.hashCode ^
       author.hashCode ^
       price.hashCode;

@@ -7,7 +7,6 @@ import 'package:languages_project/view/log_in_page.dart';
 import 'package:languages_project/view/profile_page.dart';
 import 'package:languages_project/view/types_page.dart';
 
-
 ///////////////////////////
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -28,7 +27,7 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-     drawer: Drawer(
+      drawer: Drawer(
         surfaceTintColor: Colors.white,
         backgroundColor: Color.fromARGB(255, 150, 151, 152),
         shadowColor: Color(0xff90CDF9),
@@ -40,25 +39,27 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Color(0xff90CDF9),
                 ),
-                accountName: Text("hiba Kaboul"),
+                accountName: Text("hiba Kabboul"),
                 accountEmail: Text("hiba@gmail.com")),
-             InkWell(onTap: () {
-               Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfilePage(),));
-             },
-               child: ListTile(
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfilePage(),
+                    ));
+              },
+              child: ListTile(
                 title: Text('Profile').tr(),
                 leading: Icon(Icons.person),
-                           ),
-             ),
-             ListTile(
+              ),
+            ),
+            ListTile(
               title: Text('Settings').tr(),
               leading: Icon(Icons.settings),
             ),
             ExpansionTile(
-              title:  Text("language").tr(),
+              title: Text("language").tr(),
               onExpansionChanged: (bool isExpencion) {
                 print(isExpencion);
               },
@@ -75,8 +76,7 @@ class HomePage extends StatelessWidget {
                         context.setLocale(Locale('en', 'US'));
                       }
                     },
-                    child: Text("Enghlish Language").tr()
-                    ),
+                    child: Text("Enghlish Language").tr()),
                 TextButton(
                     onPressed: () {
                       if (context.locale.languageCode == 'en') {
@@ -90,38 +90,36 @@ class HomePage extends StatelessWidget {
             //   title: Text('Langauge'),
             //   leading: Icon(Icons.language),
             // ),
-             ListTile(
+            ListTile(
               title: Text('Theme').tr(),
               leading: Icon(Icons.dark_mode),
             ),
 
             InkWell(
-              onTap: () async{
-                 
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => LogInPage(),
-                    //     ));
+              onTap: () async {
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => LogInPage(),
+                //     ));
 
-                    bool status = await logout();
-if (status) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Log out Successfuly"),
-                        backgroundColor: Colors.green,
+                bool status = await logout();
+                if (status) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Log out Successfuly"),
+                    backgroundColor: Colors.green,
+                  ));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LogInPage(),
                       ));
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LogInPage(),
-                          ));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Log out Not Successfuly"),
-                        backgroundColor: Colors.red,
-                      ));
-                    
-                  }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Log out Not Successfuly"),
+                    backgroundColor: Colors.red,
+                  ));
+                }
               },
               child: ListTile(
                 title: Text("Log Out").tr(),
@@ -151,28 +149,28 @@ if (status) {
                   borderRadius: BorderRadius.circular(20)),
               child: Row(
                 children: [
-                   Padding(
-                    padding: EdgeInsets.only(left: 10.0, top: 50,right: 30),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10.0, top: 50, right: 30),
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           "Welcome to BookNest !",
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
                               color: Colors.black),
                         ).tr(),
-                        Gap(4),
+                       const  Gap(4),
                         const Text(
                           " your ultimate destination for",
                           style: TextStyle(fontSize: 13),
                         ).tr(),
-                        Text("discovering and purchasing").tr(),
-                        Text("your favorite books!").tr()
+                        const Text("discovering and purchasing").tr(),
+                       const  Text("your favorite books!").tr()
                       ],
                     ),
                   ),
-                  Gap(20),
+                const  Gap(20),
                   Image.asset(
                       fit: BoxFit.cover,
                       width: 100,
@@ -202,14 +200,12 @@ if (status) {
                         padding: const EdgeInsets.all(10),
                         gridDelegate:
                             const SliverGridDelegateWithMaxCrossAxisExtent(
-                             
                           maxCrossAxisExtent: 300,
                           mainAxisSpacing: 20,
                           crossAxisSpacing: 20,
                           childAspectRatio: 5 / 6,
                         ),
-
-itemCount: snapshot.data!.stores.length,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
@@ -224,24 +220,22 @@ itemCount: snapshot.data!.stores.length,
                             child: Container(
                               alignment: Alignment.bottomLeft,
                               decoration: BoxDecoration(
-                              
                                 image: DecorationImage(
                                     fit: BoxFit.fitHeight,
                                     image: Image.network(
                                       "http://127.0.0.1:8000" +
-                                          snapshot.data!.stores[index].image,
+                                          snapshot.data![index].image!,
                                       fit: BoxFit.fill,
                                     ).image),
                               ),
                               child: Container(
-
-                              color: Color.fromARGB(225, 144, 205, 249),
+                                color: Color.fromARGB(225, 144, 205, 249),
                                 child: Row(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                          snapshot.data!.stores[index].name),
+                                          snapshot.data![index].name!),
                                     ),
                                   ],
                                 ),

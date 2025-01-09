@@ -119,7 +119,7 @@ class BooksPage extends StatelessWidget {
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   BookDetailsPage(
-                                                id: index + 1,
+                                                id:snapshot.data![index].id,
                                               ),
                                             ));
                                       },

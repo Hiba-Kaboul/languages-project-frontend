@@ -18,7 +18,7 @@ Future<BooksDetailModel> getBooksDetailes(int id) async {
       ),
     );
 
-    BooksDetailModel booksdetails = BooksDetailModel.fromMap(response.data);
+    BooksDetailModel booksdetails = BooksDetailModel.fromMap(response.data["data"]);
 
     return booksdetails;
   } catch (e) {

@@ -1,15 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
 class GetStoresModel {
-  String messege;
+  String? messege;
   List<Store> stores;
   GetStoresModel({
-    required this.messege,
+    this.messege,
     required this.stores,
   });
+ 
 
   GetStoresModel copyWith({
     String? messege,
@@ -30,19 +30,14 @@ class GetStoresModel {
 
   factory GetStoresModel.fromMap(Map<String, dynamic> map) {
     return GetStoresModel(
-      messege: map['messege'] as String,
-      stores: List<Store>.from(
-        (map['stores'] as List<dynamic>).map<Store>(
-          (x) => Store.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      messege: map['messege'] != null ? map['messege'] as String : null,
+      stores: List<Store>.from((map['stores'] as List<int>).map<Store>((x) => Store.fromMap(x as Map<String,dynamic>),),),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory GetStoresModel.fromJson(String source) =>
-      GetStoresModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory GetStoresModel.fromJson(String source) => GetStoresModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'GetStoresModel(messege: $messege, stores: $stores)';
@@ -50,8 +45,10 @@ class GetStoresModel {
   @override
   bool operator ==(covariant GetStoresModel other) {
     if (identical(this, other)) return true;
-
-    return other.messege == messege && listEquals(other.stores, stores);
+  
+    return 
+      other.messege == messege &&
+      listEquals(other.stores, stores);
   }
 
   @override
@@ -59,14 +56,15 @@ class GetStoresModel {
 }
 
 class Store {
-  int id;
-  String name;
-  String image;
+  int? id;
+  String? name;
+  String? image;
   Store({
-    required this.id,
-    required this.name,
-    required this.image,
+    this.id,
+    this.name,
+    this.image,
   });
+
 
   Store copyWith({
     int? id,
@@ -90,16 +88,15 @@ class Store {
 
   factory Store.fromMap(Map<String, dynamic> map) {
     return Store(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      image: map['image'] as String,
+      id: map['id'] != null ? map['id'] as int : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      image: map['image'] != null ? map['image'] as String : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Store.fromJson(String source) =>
-      Store.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Store.fromJson(String source) => Store.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'Store(id: $id, name: $name, image: $image)';
@@ -107,8 +104,11 @@ class Store {
   @override
   bool operator ==(covariant Store other) {
     if (identical(this, other)) return true;
-
-    return other.id == id && other.name == name && other.image == image;
+  
+    return 
+      other.id == id &&
+      other.name == name &&
+      other.image == image;
   }
 
   @override
